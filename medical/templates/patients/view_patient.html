@@ -1,0 +1,90 @@
+<!-- patient_management/templates/patient_management/view_patient.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ patient.name }}</h2>
+<p>Date of Birth: {{ patient.dob }}</p>
+
+<h3>Appointments</h3>
+<ul>
+  
+    
+  
+</ul>
+
+<div class="row">
+    <div class="col-md-12 mb-4">
+      <div class="accordion w-100" id="accordion1">
+        {% for appointment in appointments_info %}
+        {% if appointment.last == "False" %}
+            <div class="card shadow">
+                <div class="card-header" id="heading1">
+                <a role="button" href="#collapse{{forloop.counter}}" data-toggle="collapse" data-target="#collapse{{forloop.counter}}" aria-expanded="false" aria-controls="collapse1">
+                    <strong>{{ appointment.date }} {{ appointment.time }} - {{ appointment.doctor }}</strong>
+                </a>
+                </div>
+                <div id="collapse{{forloop.counter}}" class="collapse " aria-labelledby="heading1" data-parent="#accordion1">
+                <div class="card-body"> 
+                    
+                    {% if appointment.text == "Data" %}
+                    <strong>Diagnosis    : </strong> <p>{{appointment.diagnosis}}</p>
+                    <strong>Illness      : </strong> <p>{{appointment.illness}}</p>
+                    <strong>Treatment    : </strong> <p>{{appointment.treatment}}</p>
+                    <strong>Prescription : </strong> <p>{{appointment.prescription}}</p>
+                    {% else %}
+                    No Data Found for this appointment
+                    {% endif %}
+                    
+                </div>
+                </div>
+            </div>
+
+        {% elif appointment.last == "None" %}
+        <div class="card shadow ">
+            <div class="card-header" id="heading1">
+            <a role="button" href="#collapse{{forloop.counter}}" data-toggle="collapse" data-target="#collapse{{forloop.counter}}" aria-expanded="false" aria-controls="collapse1">
+                <strong>{{ appointment.date }} {{ appointment.time }} - {{ appointment.doctor }}</strong>
+            </a>
+            </div>
+            <div id="collapse{{forloop.counter}}" class="collapse show" aria-labelledby="heading1" data-parent="#accordion1">
+            <div class="card-body"> 
+                
+                {% if appointment.text == "Data" %}
+                <strong>Diagnosis    : </strong> <p>{{appointment.diagnosis}}</p>
+                <strong>Illness      : </strong> <p>{{appointment.illness}}</p>
+                <strong>Treatment    : </strong> <p>{{appointment.treatment}}</p>
+                <strong>Prescription : </strong> <p>{{appointment.prescription}}</p>
+                {% else %}
+                No Data Found for this appointment
+                {% endif %}
+                
+            </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="card shadow">
+            <div class="card-header" id="heading1">
+            <a role="button" href="#collapse{{forloop.counter}}" data-toggle="collapse" data-target="#collapse{{forloop.counter}}" aria-expanded="false" aria-controls="collapse1">
+                <strong>{{ appointment.date }} {{ appointment.time }} - {{ appointment.doctor }}</strong>
+            </a>
+            </div>
+            <div class="card-body">
+            <div id="collapse{{forloop.counter}}" class="collapse show" aria-labelledby="heading1" data-parent="#accordion1"><h2>Current Diagnosis</h2>
+                
+                    <form class="form" method="post">
+                    {% csrf_token %}
+                    
+                    {{ form.as_p }}
+                    <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% endfor %}
+       
+    </div>
+    
+  </div> <!-- end section -->
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Schedule Surgery Per Person{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="row justify-content-center">
+  <div class="col-12">
+    <h2 class="mb-2 page-title">Schedule Surgery Per Person</h2>
+    <div class="row my-4">
+      <!-- Small table -->
+      <div class="col-md-12">
+        <div class="card shadow">
+          <div class="card-body">
+            <!-- table -->
+            <table class="table datatables" id="dataTable-1">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Patient Name</th>
+                  <th>Patient DOB</th>
+                  <th>Patient Contact Number</th>
+                  <th>Surgeon</th>
+                  <th>Surgery Date</th>
+                  <th>Surgery Room</th>
+                  <th>Action</th>
+
+                  
+                </tr>
+              </thead>
+              <tbody>
+              {% for x  in scheduled_surgeries  %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{x.patient.name}}</td>
+                  <td>{{x.patient.dob}}</td>
+                  <td>{{x.patient.phone_no}}</td>
+                  <td>{{x.surgeon.name}}</td>
+                  <td>{{x.scheduled_surgery_date}}</td>
+                  <td>{{x.scheduled_surgery_room }}</td>
+                  
+      
+                  <td><a href="#"><button class="btn btn-primary btn-sm " type="button"  aria-haspopup="true" aria-expanded="false">
+                      Edit
+                    </button></a>
+                    
+                    </div> 
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div> <!-- simple table -->
+    </div> <!-- end section -->
+  </div> <!-- .col-12 -->
+</div> <!-- .row -->
+
+{% endblock %}

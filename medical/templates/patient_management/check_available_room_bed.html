@@ -1,0 +1,174 @@
+<!-- templates/patient_management/check_available_room_bed.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Check Available Room/Bed{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h2 class="mb-2 page-title">Check Available Rooms</h2>
+      <p class="mb-2 page-title">Black Represent Room/Bed is booked</p>
+      <p class="mb-2 page-title">Blue Represent Room/Bed is Available</p>
+
+
+      <!-- Small table -->
+
+      <div class="col-md-12">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="mb-2 page-title">Check Private Rooms</h3>
+            {% for x in available_private_rooms%}
+
+            {% if x.is_available == True %}
+            <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=1&is_booked=false"><button class="btn btn-primary btn-sm " type="button" aria-haspopup="true" aria-expanded="false">
+              {{x.room_number}}
+            </button></a>
+            {% else %}
+            <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=1&is_booked=true"><button class="btn btn-dark btn-sm " type="button" aria-haspopup="true" aria-expanded="false" >
+              {{x.room_number}}
+            </button></a>
+            {% endif %}
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="mb-2 page-title">Check Surgery Rooms</h3>
+            {% for x in available_surgery_rooms%}
+
+            {% if x.is_available == True %}
+            <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=1&is_booked=false"><button class="btn btn-primary btn-sm " type="button" aria-haspopup="true" aria-expanded="false">
+              {{x.room_number}}
+            </button></a>
+            {% else %}
+            <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=1&is_booked=true"><button class="btn btn-dark btn-sm " type="button" aria-haspopup="true" aria-expanded="false" >
+              {{x.room_number}}
+            </button></a>
+            {% endif %}
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="mb-2 page-title">Check Shared Rooms</h3>
+
+            <div class="row">
+              <div class="accordion w-100" id="accordion1">
+                {% for x in available_shared_rooms %}
+                {% if x.is_available == True %}
+                <div class="col-3 ">
+                  <div class="card shadow">
+                    <div class="card-header" id="heading1">
+                      <a role="button" href="#collapse{{forloop.counter}}" data-toggle="collapse"
+                        data-target="#collapse{{forloop.counter}}" aria-expanded="false" aria-controls="collapse1">
+                        <strong class="text-primary">Room - {{x.room_number}} Available</strong>
+                      </a>
+                    </div>
+                    <div id="collapse{{forloop.counter}}" class="collapse " aria-labelledby="heading1"
+                      data-parent="#accordion1">
+                      <div class="card-body">
+
+                        {% if x.bed_number_1 == True %}
+                        <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=1&is_booked=true"><strong class="text-dark " type="button" aria-haspopup="true" aria-expanded="false">
+                          Bed 1 is Booked
+                        </strong></a>
+                        {% else %}
+                        <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=1&is_booked=false"><strong class="text-primary " type="button" aria-haspopup="true" aria-expanded="false">
+                          Bed 1 is Available
+                        </strong></a>
+                        {% endif %}
+                        <br>
+
+                        {% if x.bed_number_2 == True %}
+
+                        <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=2&is_booked=true"><strong class="text-dark " type="button" aria-haspopup="true" aria-expanded="false">
+                          Bed 2 is Booked
+                        </strong></a>
+                        {% else %}
+                        <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=2&is_booked=false"><strong class="text-primary " type="button" aria-haspopup="true" aria-expanded="false">
+                          Bed 2 is Available
+                        </strong></a>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                {% else %}
+
+
+                <div class="col-3 ">
+                  <div class="card shadow">
+                    <div class="card-header" id="heading1">
+                      <a role="button" href="{% url 'room_management' %}?room={{x.room_number}}&bed=1" data-toggle="collapse"
+                        data-target="#collapse{{forloop.counter}}" aria-expanded="false" aria-controls="collapse1">
+                        <strong class="text-dark">Room - {{x.room_number}} is Booked</strong>
+                      </a>
+                    </div>
+
+                    <div id="collapse{{forloop.counter}}" class="collapse " aria-labelledby="heading1"
+                      data-parent="#accordion1">
+                      <div class="card-body">
+
+                        {% if x.bed_number_1 == True %}
+                        <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=1&is_booked=true"><strong class="text-dark " type="button" aria-haspopup="true" aria-expanded="false">
+                          Bed 1 is Booked
+                        </strong></a>
+                        {% else %}
+                        <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=1&is_booked=false"><strong class="text-dark " type="button" aria-haspopup="true" aria-expanded="false">
+                          Bed 1 is Available
+                        </strong></a>
+                        {% endif %}
+                        <br>
+
+                        {% if x.bed_number_2 == True %}
+
+                        <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=2&is_booked=true"><strong class="text-dark " type="button" aria-haspopup="true" aria-expanded="false">
+                          Bed 2 is Booked
+                        </strong></a>
+                        {% else %}
+                        <a href="{% url 'room_management' %}?room={{x.room_number}}&bed=2&is_booked=false"><strong class="text-dark " type="button" aria-haspopup="true" aria-expanded="false">
+                          Bed 2 is Available
+                        </strong></a>
+                        {% endif %}
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+                {% endif %}
+
+                {% endfor %}
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+{% endblock %}

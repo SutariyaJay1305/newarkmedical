@@ -1,0 +1,14 @@
+<!-- templates/patient_management/book_surgery.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Book Surgery{% endblock %}
+
+{% block content %}
+  <h2>Book Surgery</h2>
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Book Surgery</button>
+  </form>
+{% endblock %}

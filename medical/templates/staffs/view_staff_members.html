@@ -1,0 +1,127 @@
+<!-- templates/patient_management/view_staff_members.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Medical Staff Management{% endblock %}
+
+{% block content %}
+<h2>View Staff Members</h2>
+<form method="get" action="{% url 'view_staff_members' %}">
+  <label for="job_type">Filter by Job Type:</label>
+  <select name="job_type" id="job_type">
+    <option value="">All</option>
+    <option value="Doctor">Doctor</option>
+    <option value="Nurse">Nurse</option>
+    <option value="Surgeon">Surgeon</option>
+    <option value="Physician">Physician</option>
+    <option value="Pharmacist">Pharmacist</option>
+    <option value="Medical Technologist">Medical Technologist</option>
+    <option value="Radiologist">Radiologist</option>
+    <option value="Physical Therapist">Physical Therapist</option>
+    <option value="Occupational Therapist">Occupational Therapist</option>
+    <option value="Speech-Language Pathologist">Speech-Language Pathologist</option>
+    <option value="Administrative Staff">Administrative Staff</option>
+    <option value="Maintenance and Support Staff">Maintenance and Support Staff</option>
+    <!-- Add more job types as needed -->
+  </select>
+  <button type="submit">Filter</button>
+</form>
+
+
+
+
+  
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h2 class="mb-2 page-title">Staff Data</h2>
+      <div class="row my-4">
+        <!-- Small table -->
+        <div class="col-md-12">
+          <div class="card shadow">
+            <div class="card-body">
+              <!-- table -->
+
+              <table class="table datatables" id="dataTable-1">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Job Type</th>
+                    <th>Phone No</th>
+                    <th>gender</th>
+                    <th>DOB</th>
+                    <th>SSN</th>
+                    <th>Email</th>
+                    <th>address</th>
+                    <th>shift_time</th>
+                    <th>shift_end_time</th>
+                    <th>emergency_contact_name</th>
+                    <th>emergency_contact_phone</th>
+                    <th>qualifications</th>
+                    <th>license_certification</th>
+                    <th>experience_years</th>
+                    <th>blood_type</th>
+                    <th>allergies</th>
+                    <th>medical_conditions</th>
+                    <th>joining_date</th>
+                    <th>status</th>
+                    <th>termination_date</th>
+                    <th>Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for x  in staff_members  %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{x.name}}</td>
+                    <td>{{x.job_type}}</td>
+                    <td>{{x.phone_number}}</td>
+                    <td>{{x.gender}}</td>
+                    <td>{{x.date_of_birth}}</td>
+                    <td>{{x.ssn}}</td>
+                    <td>{{x.email}}</td>
+                    <td>{{x.address}}</td>
+                    <td>{{x.shift_time}}</td>
+                    <td>{{x.end_time}}</td>
+                    <td>{{x.emergency_contact_name}}</td>
+                    <td>{{x.emergency_contact_phone}}</td>
+                    <td>{{x.qualifications}}</td>
+                    <td>{{x.license_certification}}</td>
+                    <td>{{x.experience_years}}</td>
+                    <td>{{x.blood_type}}</td>
+                    <td>{{x.allergies}}</td>
+                    <td>{{x.medical_conditions}}</td>
+                    <td>{{x.joining_date}}</td>
+                    <td>{{x.status}}</td>
+                    <td>{{x.termination_date}}</td>
+                    
+                    
+        
+                    <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-muted sr-only">Action</span>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        {% comment %} <a class="dropdown-item" href="#">Remove</a>
+                        <a class="dropdown-item" href="#">Assign</a> {% endcomment %}
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div> <!-- simple table -->
+      </div> <!-- end section -->
+    </div> <!-- end section -->
+  </div> <!-- end section -->
+  </div> <!-- end section -->
+
+
+
+
+
+{% endblock %}

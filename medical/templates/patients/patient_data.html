@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Patient Data{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12">
+      <h2 class="mb-2 page-title">Patients Data</h2>
+      <div class="row my-4">
+        <!-- Small table -->
+        <div class="col-md-12">
+          <div class="card shadow">
+            <div class="card-body">
+              <!-- table -->
+              <table class="table datatables" id="dataTable-1">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>DOB</th>
+                    <th>Phone No</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>SSN</th>
+                    <th>Blood Type</th>
+                    <th>Gender</th>
+                    <th>Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for x  in patient  %}
+                  <tr>
+                    <td>{{x.id}}</td>
+                    <td>{{x.name}}</td>
+                    <td>{{x.dob}}</td>
+                    <td>{{x.phone_no}}</td>
+                    <td>{{x.email}}</td>
+                    <td>{{x.address}}</td>
+                    <td>{{x.SSN}}</td>
+                    <td>{{x.blood_type}}</td>
+                    
+                    <td>{{x.gender}}</td>
+        
+                    <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-muted sr-only">Action</span>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        {% comment %} <a class="dropdown-item" href="#">Remove</a>
+                        <a class="dropdown-item" href="#">Assign</a> {% endcomment %}
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div> <!-- simple table -->
+      </div> <!-- end section -->
+    </div> <!-- .col-12 -->
+  </div> <!-- .row -->
+{% endblock %}

@@ -1,0 +1,12 @@
+<!-- patient_management/templates/patient_management/add_patient.html -->
+{% extends 'base.html' %}
+{% block title %}Add Doctor{% endblock %}
+
+{% block content %}
+<h2>Add New Doctor</h2>
+<form class="form" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

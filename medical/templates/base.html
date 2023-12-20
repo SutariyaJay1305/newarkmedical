@@ -1,0 +1,262 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% comment %} <link rel="icon" href="favicon.ico"> {% endcomment %}
+    <title> {% block title %}{% endblock %}</title>
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="{% static 'css/simplebar.css' %}">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="{% static 'css/feather.css' %}">
+    <!-- Date Range Picker CSS -->
+    
+
+    <link rel="stylesheet" href="{% static 'css/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <link rel="stylesheet" href="{% static 'css/uppy.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.steps.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/quill.snow.css' %}">
+    <link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.css' %}">
+
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="{% static 'css/app-light.css' %}" id="lightTheme">
+    <link rel="stylesheet" href="{% static 'css/app-dark.css' %}" id="darkTheme" disabled>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  </head>
+  <body class="vertical  light  ">
+    <div class="wrapper">
+      <nav class="topnav navbar navbar-light">
+        <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+          <i class="fe fe-menu navbar-toggler-icon"></i>
+        </button>
+        
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
+              <i class="fe fe-sun fe-16"></i>
+            </a>
+          </li>
+         
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="avatar avatar-sm mt-2">
+                <img src="{% static '/assets/images/profile.png ' %}" alt="..." class="avatar-img rounded-circle">
+              </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+              
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
+        <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
+          <i class="fe fe-x"><span class="sr-only"></span></i>
+        </a>
+        <nav class="vertnav navbar navbar-light">
+          <!-- nav bar -->
+          <div class="w-100 mb-4 d-flex">
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
+              <svg version="1.1" id="logo" class="navbar-brand-img brand-sm" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 120 120" xml:space="preserve">
+                <g>
+                  <polygon class="st0" points="78,105 15,105 24,87 87,87 	" />
+                  <polygon class="st0" points="96,69 33,69 42,51 105,51 	" />
+                  <polygon class="st0" points="78,33 15,33 24,15 87,15 	" />
+                </g>
+              </svg>
+            </a>
+          </div>
+          
+         
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item dropdown">
+                <a class="nav-link pl-3" href="{% url 'dashboard' %}"><i class="fe fe-home fe-16"></i><span class="ml-1 item-text">Dashboard</span>
+
+              <a href="#ui-elements" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <i class="fe fe-box fe-16"></i>
+                <span class="ml-3 item-text">Patient</span>
+              </a>
+              <ul class="collapse list-unstyled pl-4 w-100 show"  id="ui-elements">
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'add_patient' %}"><span class="ml-1 item-text">Add Patient</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'patient_data' %}"><span class="ml-1 item-text">Patient Data</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'appointment' %}"><span class="ml-1 item-text">Appointment</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'patient_history' %}"><span class="ml-1 item-text">Patient History</span></a>
+                </li>
+              </ul>
+            </li>
+           
+            <li class="nav-item dropdown">
+              <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <i class="fe fe-credit-card fe-16"></i>
+                <span class="ml-3 item-text">Doctor</span>
+              </a>
+              <ul class="collapse list-unstyled pl-4 w-100 show" id="forms">
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'add_doctor' %}"><span class="ml-1 item-text">Add Doctor</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'scheuled' %}"><span class="ml-1 item-text">Scheduled</span></a>
+                </li>
+               
+              </ul>
+            </li>
+            
+            
+          </ul>
+
+          <p class="text-muted nav-heading mt-4 mb-1">
+            <span><br></span>
+          </p>
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item dropdown">
+              <a href="#ui-elements1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <i class="fe fe-box fe-16"></i>
+                <span class="ml-3 item-text">In-Patient</span>
+              </a>
+              <ul class="collapse list-unstyled pl-4 w-100 show" id="ui-elements1">
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'check_available_room_bed' %}"><span class="ml-1 item-text">Check Availabe Room</span>
+                  </a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'book_surgery' %}"><span class="ml-1 item-text">Book Surgery</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'view_scheduled_surgery_per_patient' %}"><span class="ml-1 item-text">View Scheduled Surgery Per Patient</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'view_scheduled_surgery_per_surgeon' %}"><span class="ml-1 item-text">View Scheduled Surgery Per Surgon</span></a>
+                </li>
+              </ul>
+            </li>
+            
+          </ul>
+
+
+        
+
+          <p class="text-muted nav-heading mt-4 mb-1">
+            <span></span>
+          </p>
+          <ul class="navbar-nav flex-fill w-100 mb-2 show">
+            <li class="nav-item dropdown">
+              <a href="#ui-elements2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <i class="fe fe-box fe-16"></i>
+                <span class="ml-3 item-text">Staff</span>
+              </a>
+              <ul class="collapse list-unstyled pl-4 w-100 show" id="ui-elements2">
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'add_remove_staff_member' %}"><span class="ml-1 item-text">Add Staff</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'view_staff_members' %}"><span class="ml-1 item-text">View Staff</span></a>
+                </li>
+                
+              </ul>
+            </li>
+            
+          </ul>
+         
+         
+          
+          
+        </nav>
+      </aside>
+      <main role="main" class="main-content">
+        <div class="container-fluid">
+            {% block content %}{% endblock %}
+            
+          {% comment %} <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="row align-items-center mb-2">
+                <div class="col">
+                  <h2 class="h5 page-title">Welcome!</h2>
+                </div>
+                <div class="col-auto"> {% endcomment %}
+                  
+        </div>
+      </main> <!-- main -->
+    </div> <!-- .wrapper -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/simplebar.min.js' %}"></script>
+    <script src="{% static 'js/daterangepicker.js' %}"></script>
+    <script src="{% static 'js/jquery.stickOnScroll.js' %}"></script>
+    <script src="{% static 'js/tinycolor-min.js' %}"></script>
+    <script src="{% static 'js/config.js' %}"></script>
+    <script src="{% static 'js/d3.min.js' %}"></script>
+    <script src="{% static 'js/topojson.min.js' %}"></script>
+    <script src="{% static 'js/datamaps.all.min.js' %}"></script>
+    <script src="{% static 'js/datamaps-zoomto.js' %}"></script>
+    <script src="{% static 'js/datamaps.custom.js' %}"></script>
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/jquery.timepicker.js' %}"></script>
+    <script src="{% static 'js/select2.min.js' %}"></script> 
+    <script src="{% static 'js/jquery.steps.min.js' %}"></script> 
+    <script src="{% static 'js/dropzone.min.js' %}"></script> 
+    <script src="{% static 'js/uppy.min.js' %}"></script> 
+    <script src="{% static 'js/quill.min.js' %}"></script> 
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+   
+
+    <script src="{% static 'js/gauge.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/apexcharts.min.js' %}"></script>
+    <script src="{% static 'js/apexcharts.custom.js' %}"></script>
+    <script src="{% static 'js/apps.js' %}"></script>
+
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
+    <script>
+      $('.datatables').DataTable(
+      {
+        scrollX: true,
+        autoWidth: true,
+        "lengthMenu": [
+          [16, 32, 64, -1],
+          [16, 32, 64, "All"]
+        ]
+      });
+      
+    </script>
+    <script>
+      
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag()
+      {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-56159088-1');
+    </script>
+  </body>
+</html>

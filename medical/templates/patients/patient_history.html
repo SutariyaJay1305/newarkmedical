@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Add Doctor{% endblock %}
+
+{% block content %}
+<h2>Patient History</h2>
+<form class="form" method="post">
+  {% csrf_token %}
+  <div class="card my-4">
+    <div class="card-header">
+      <strong>Search Patient History</strong>
+    </div>
+    <div class="card-body">
+      <form class="form" id="example-form" method="post">
+        <div>
+          <section>
+            <div class="form-group">
+              <label for="userName">Name</label>
+              <input id="userName" name="name" type="text" class="form-control required">
+            </div>
+            <div class="form-group">
+              <label for="password">Date of Birth</label>
+              <input id="password" name="dob" type="date" class="form-control required">
+            </div>
+            <div class="form-group">
+              <label for="confirm">Phone Number</label>
+              <input id="confirm" name="phone" type="number" class="form-control required">
+            </div>
+            <div class="help-text text-muted"></div>
+          </section>
+          <button type="submit" class="btn btn-secondary btn-small" data-dismiss="modal">Search</button>
+
+          
+        </div>
+      </form>
+    </div> <!-- .card-body -->
+  </div> <!-- .card -->
+</form>
+{% endblock %}

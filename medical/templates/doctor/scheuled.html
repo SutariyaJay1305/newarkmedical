@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Add Doctor{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="row justify-content-center">
+  <div class="col-12">
+    <h2 class="mb-2 page-title">Schedule</h2>
+    <div class="row my-4">
+      <!-- Small table -->
+      <div class="col-md-12">
+        <div class="card shadow">
+          <div class="card-body">
+            <!-- table -->
+            <table class="table datatables" id="dataTable-1">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Patients</th>
+                  <th>Doctor</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for x  in appointments  %}
+                <tr>
+                  <td>{{x.id}}</td>
+                  <td>{{x.patient}}</td>
+                  <td>{{x.doctor}}</td>
+                  <td>{{x.date}}</td>
+                  <td>{{x.time}}</td>
+                  <td>{{x.reason}}</td>
+                  <td>{{x.status }}</td>
+                  
+      
+                  <td><a href="{% url 'view_patient' x.patient.id %}"><button class="btn btn-primary btn-sm " type="button"  aria-haspopup="true" aria-expanded="false">
+                      Check up
+                    </button></a>
+                    {% comment %} <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      {% comment %} <a class="dropdown-item" href="#">Remove</a>
+                      <a class="dropdown-item" href="#">Assign</a> {% endcomment %}
+                    </div> 
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div> <!-- simple table -->
+    </div> <!-- end section -->
+  </div> <!-- .col-12 -->
+</div> <!-- .row -->
+
+{% endblock %}
